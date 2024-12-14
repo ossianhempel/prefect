@@ -18,6 +18,8 @@ PG_DATABASE_FPL = os.getenv("PG_DATABASE_FPL")
 PG_TABLE_NAME_GW_FPL = os.getenv("PG_TABLE_NAME_GW_FPL")
 PG_TABLE_NAME_FIXTURES_FPL = os.getenv("PG_TABLE_NAME_FIXTURES_FPL")
 
+WEB_SERVER_URL = "http://ckwcgcscsok4w0w84w0s80ww.65.108.88.160.sslip.io"
+
 @task
 def download_file(url: str, file_path: str) -> str:
     response = requests.get(url)
@@ -28,7 +30,7 @@ def download_file(url: str, file_path: str) -> str:
 
 @task
 def upload_file_to_fastapi(endpoint: str, source: str, file_path: str, filename: str) -> None:
-    url = f"http://os8w0ss0c4kwoogk8o44csg4.65.108.88.160.sslip.io/upload/{source}"
+    url = f"{WEB_SERVER_URL}/upload/{source}"
     with open(file_path, "rb") as f:
         files = {"file": (filename, f)}
         response = requests.post(url, files=files)
@@ -38,7 +40,7 @@ def upload_file_to_fastapi(endpoint: str, source: str, file_path: str, filename:
 
 @task
 def ingest_to_postgres(source: str) -> None:
-    url = "http://os8w0ss0c4kwoogk8o44csg4.65.108.88.160.sslip.io/ingest/" + source
+    url = f"{WEB_SERVER_URL}/ingest/{source}"
     headers = {"Content-Type": "application/json"}
     data = {"source": source}
     

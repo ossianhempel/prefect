@@ -15,21 +15,35 @@ push: null
 # pull section allows you to provide instructions for cloning this project in remote locations
 pull:
 - prefect.deployments.steps.git_clone:
-    repository: git@github.com:ossianhempel/prefect.git
+    repository: https://github.com/ossianhempel/prefect.git
     branch: main
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
-- name: test-deployment
-  version: null
-  tags: []
-  concurrency_limit: null
-  description: null
-  entrypoint: flows/test_flow.py:hello_flow
-  parameters: {}
-  work_pool:
-    name: default
-    work_queue_name: null
-    job_variables: {}
-  enforce_parameter_schema: true
-  schedules: []
+  - name: test-deployment
+    version: null
+    tags: []
+    concurrency_limit: null
+    description: null
+    entrypoint: flows/test_flow.py:hello_flow
+    parameters: {}
+    work_pool:
+      name: default
+      work_queue_name: null
+      job_variables: {}
+    enforce_parameter_schema: true
+    schedules: []
+  - name: fpl-pipeline-deployment
+    version: null
+    tags: []
+    concurrency_limit: null
+    description: null
+    schedule:
+      cron: "0 0 * * 2"  # Every Tuesday at midnight
+    entrypoint: flows/fpl_pipeline.py:fpl_pipeline  # Changed from fpl-pipeline-deployment.py to fpl_pipeline.py
+    parameters: {}
+    work_pool:
+      name: default
+      work_queue_name: null
+      job_variables: {}
+    enforce_parameter_schema: true
