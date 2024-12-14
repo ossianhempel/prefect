@@ -6,17 +6,17 @@ import json
 from prefect import flow, task
 
 # get secrets
-MINIO_ENDPOINT_FPL = os.getenv("MINIO_ENDPOINT_FPL")
-MINIO_ACCESS_KEY_FPL = os.getenv("MINIO_ACCESS_KEY_FPL")
-MINIO_SECRET_KEY_FPL = os.getenv("MINIO_SECRET_KEY_FPL")
+# MINIO_ENDPOINT_FPL = os.getenv("MINIO_ENDPOINT_FPL")
+# MINIO_ACCESS_KEY_FPL = os.getenv("MINIO_ACCESS_KEY_FPL")
+# MINIO_SECRET_KEY_FPL = os.getenv("MINIO_SECRET_KEY_FPL")
 
-PG_HOST_FPL = os.getenv("PG_HOST_FPL")
-PG_PORT_FPL = os.getenv("PG_PORT_FPL")
-PG_USER_FPL = os.getenv("PG_USER_FPL")
-PG_PASSWORD_FPL = os.getenv("PG_PASSWORD_FPL")
-PG_DATABASE_FPL = os.getenv("PG_DATABASE_FPL")
-PG_TABLE_NAME_GW_FPL = os.getenv("PG_TABLE_NAME_GW_FPL")
-PG_TABLE_NAME_FIXTURES_FPL = os.getenv("PG_TABLE_NAME_FIXTURES_FPL")
+# PG_HOST_FPL = os.getenv("PG_HOST_FPL")
+# PG_PORT_FPL = os.getenv("PG_PORT_FPL")
+# PG_USER_FPL = os.getenv("PG_USER_FPL")
+# PG_PASSWORD_FPL = os.getenv("PG_PASSWORD_FPL")
+# PG_DATABASE_FPL = os.getenv("PG_DATABASE_FPL")
+# PG_TABLE_NAME_GW_FPL = os.getenv("PG_TABLE_NAME_GW_FPL")
+# PG_TABLE_NAME_FIXTURES_FPL = os.getenv("PG_TABLE_NAME_FIXTURES_FPL")
 
 WEB_SERVER_URL = "http://ckwcgcscsok4w0w84w0s80ww.65.108.88.160.sslip.io"
 

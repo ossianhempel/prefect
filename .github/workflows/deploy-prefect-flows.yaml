@@ -1,0 +1,46 @@
+name: Deploy Prefect Flows
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "flows/**"
+      - "prefect.yaml"
+
+jobs:
+  deploy:
+    name: Deploy Flows
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install prefect
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Deploy Flows
+        env:
+          PREFECT_API_KEY: ${{ secrets.PREFECT_API_KEY }}
+          PREFECT_API_URL: ${{ secrets.PREFECT_API_URL }}
+          # MINIO_ENDPOINT_FPL: ${{ secrets.MINIO_ENDPOINT_FPL }}
+          # MINIO_ACCESS_KEY_FPL: ${{ secrets.MINIO_ACCESS_KEY_FPL }}
+          # MINIO_SECRET_KEY_FPL: ${{ secrets.MINIO_SECRET_KEY_FPL }}
+          # PG_HOST_FPL: ${{ secrets.PG_HOST_FPL }}
+          # PG_PORT_FPL: ${{ secrets.PG_PORT_FPL }}
+          # PG_USER_FPL: ${{ secrets.PG_USER_FPL }}
+          # PG_PASSWORD_FPL: ${{ secrets.PG_PASSWORD_FPL }}
+          # PG_DATABASE_FPL: ${{ secrets.PG_DATABASE_FPL }}
+          # PG_TABLE_NAME_GW_FPL: ${{ secrets.PG_TABLE_NAME_GW_FPL }}
+          # PG_TABLE_NAME_FIXTURES_FPL: ${{ secrets.PG_TABLE_NAME_FIXTURES_FPL }}
+        run: |
+          prefect deploy --all
